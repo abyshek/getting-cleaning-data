@@ -100,4 +100,7 @@ run_analysis <- function()
   
   ## Write the final tidy dataset to a text file named "tidy_data.txt"
   write.table(final_data, file = "./tidy_data.txt", sep="\t", row.names = FALSE)
+  
+  # write the final tidy data set to a csv file to get a better representation
+  write.csv(final_data,file = "./tidy_data.csv", row.names=FALSE)
 }
