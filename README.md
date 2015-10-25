@@ -16,4 +16,4 @@ Two R packages named "data.table" and "reshape2" are needed to run this R script
 
 You need to have the supplied dataset "UCI HAR Dataset" in the working directory of RStudio.
 After sourcing the R script, run the function "run_analysis()" to get the tidy data set. 
-The function will create a text file "tidy_data". You can view the file in Notepad (try to see with and without "Word Wrap") or any other text editor. You can also check by reading the text file from R Studio and then use view() function to see the imported data in a tabular form.
+The function will create a text file "tidy_data". You can view the file in Notepad (try to see with and without "Word Wrap") or any other text editor. You can also check by reading the text file from R Studio and then use view() function to see the imported data in a tabular form. To confirm the tidyness of processed data, you can also see "tidy_data.csv" which is created from the R_script and presents the tidy data in a better format.
