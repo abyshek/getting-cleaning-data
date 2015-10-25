@@ -1,4 +1,4 @@
-## Following script perform the parts of the assignment.                |
+## Following script performs the parts of the assignment.                |
 ## Following code first checks if the pre-requisite packages are        |
 ## installed. If not,it installs the packages.(a) It then merges the    |
 ## training and the test sets to create one data set and extracts only  |
@@ -25,7 +25,7 @@ run_analysis <- function()
   #loads the data.table and reshape2 package
   library("data.table")
   library("reshape2")
-  ##---------------------------------------------------------------------- 
+  ##----------------------Section 1------------------------------------------ 
   
   ## Process the Training data set and extract only measurements
   
@@ -58,7 +58,7 @@ run_analysis <- function()
   ## merge the X and Y coordinates of training data
   trainingdata <- cbind(as.data.table(trainingsubject), Y_trainingdata, X_trainingdata)  
   
-  ##------------------------------------------------------------------------------------
+  ##--------------------Section 2--------------------------------------------------------
   
   ## Process the "test data set" and extract only measurements
   
@@ -79,7 +79,7 @@ run_analysis <- function()
   
   testdata <- cbind(as.data.table(testsubject), Y_testdata, X_testdata)
   
-  ##------------------------------------------------------------------------------------
+  ##--------------------Section 3---------------------------------------------------------
   
   ## Merge the worked out "training" and "test data" sets and create a tidy set with proper
   ## labels.
@@ -87,15 +87,16 @@ run_analysis <- function()
   
   id_label   = c("PARTICIPANT", "ACTIVITY_ID", "ACTIVITY_LABEL")
   data_label = setdiff(colnames(combinedata), id_label)
-  data_melt      = melt(combinedata, id = id_label, measure.vars = data_label)
   
-  ##--------------------------------------------------------------------------------------
+  
+  ##-----------------------Section 4--------------------------------------------------------
   
   
   ## Appending averages of the variables of each activity and each subject
   ## to create second tidy set
+  data_melt      = melt(combinedata, id = id_label, measure.vars = data_label)
   final_data   = dcast(data_melt, PARTICIPANT + ACTIVITY_LABEL ~ variable, mean)
-  ##-------------------------------------------------------------------------------------
+  ##------------------------------Section 5-------------------------------------------------
   
   ## Write the final tidy dataset to a text file named "tidy_data.txt"
   write.table(final_data, file = "./tidy_data.txt", sep="\t", row.names = FALSE)
