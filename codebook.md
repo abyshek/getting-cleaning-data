@@ -1,19 +1,41 @@
-# getting-cleaning-data
-This is a repo for the course project "Getting and Cleaning Data". This repo contains an R script file named run_analysis.R which performs following steps:
+# CODE BOOK
 
-1) Merges the training and the test sets to create one data set.
+This codebook describes the variables, the data and any other transformation that has been performed to the supplied dataset.
 
-2) Extracts only the measurements on the mean and standard deviation for each measurement. 
+# Data Source
 
-3) Uses descriptive activity names to name the activities in the data set
+Data for the project: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+Original description of project: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
-4) Appropriately labels the data set with descriptive variable names. 
+# Variables
 
-5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+Following are some major variables used in the R script to perform the transformation:
 
-# Pre-requisites and how to use the script
-Two R packages named "data.table" and "reshape2" are needed to run this R script. The script automatically checks if the said two packages are installed. If not, the script will install them using internet and load them.
+1. act_lbls : data from "activity_labels.txt" is read into this variable
+2. data_colname: data from "features.txt" is read into this variable and gives us the column names
+3. X_trainingdata: data from "X_train.txt" is read into this variable
+4. Y_trainingdata: data from "y_train.txt" is read into this variable
+5. trainingsubject: data from "subject_train.txt" is read into this variable and gives us the ids of participants of training
+6. trainingdata: this variable stores the combined dataset of X and Y training data
+7. X_testdata: data from "X_test.txt" is read into this variable
+8. Y_testdata: data from "Y_test.txt" is read into this variable
+9. testsubject: data from "subject_test.txt" is read into this variable and gives us ids of participants of test
+10. testdata : this variable stores the combined dataset of X and Y test data
+11. combinedata: this variable stores the merged dataset of "testdata" and "training data"
 
-You need to have the supplied dataset "UCI HAR Dataset" in the working directory of RStudio.
-After sourcing the R script, run the function "run_analysis()" to get the tidy data set. 
-The function will create a text file "tidy_data". You can view the file in Notepad (try to see with and without "Word Wrap") or any other text editor. You can also check by reading the text file from R Studio and then use view() function to see the imported data in a tabular form.
+# Transformations
+The R script has been divided into several sections
+Section 1: This section process the "training" dataset. This section reads various text files related to training and stores them in variables as mention in the above "Variables" section. Line 39 of this section extracts only the measurements of mean and standard deviation. Lines 55 and 56 give meaningful labels to the measurement data
+
+Section 2: Section 2 performs similar operation on the "test" dataset as performed by the section 1.
+
+Section 3: This section merges the datasets created by section 1 and section 2 and creates a tidy dataset with with meaningful labels.
+
+Section 4: This section creates a second tidy dataset with average values of each activity and each subjects. This section uses the melt and dcast function of "reshape2" package to convert long data format to wide data format.
+
+Section 5: This final section outputs the tidy data created in section 4 to a text file named "tidy_data.txt".
+
+# Implementation of the code
+
+Original dataset and R script (run_analysis.R) should be saved together in the working directory. After sourcing the R file, function run_analysis() should be called without any parameters. This would create the final tidy data text file in the working directory.
+  
