@@ -1,9 +1,9 @@
-## Following line of codes perform the parts of the assignment.         |
+## Following script perform the parts of the assignment.                |
 ## Following code first checks if the pre-requisite packages are        |
 ## installed. If not,it installs the packages.(a) It then merges the    |
-## training and the test sets to create one data set. (b) Then          |
-## extracts only the measurements on the mean and standard deviation    |
-## for each measurement. (c) The code uses descriptive activity names   |
+## training and the test sets to create one data set and extracts only  |
+## the measurements on the mean and standard deviation for each         |
+## measurement. (c) The code uses descriptive activity names            |
 ## to name the activities in the data set. (d)code then appropriately   |
 ## labels the data set with descriptive activity names.                 |
 ## (e) Finally, the code creates a second, independent tidy data set    |
@@ -29,18 +29,20 @@ run_analysis <- function()
   
   ## Process the Training data set and extract only measurements
   
-  # Load the activity labels
+  # Load the activity labels text file
   act_lbls <- read.table("./UCI HAR Dataset/activity_labels.txt")[,2]
   
-  # Load the data column names
+  # Load the features text file to get column names
   data_colname <- read.table("./UCI HAR Dataset/features.txt")[,2]
   
   # Extract only the measurements on the mean and standard deviation for each measurement.
   measurement <- grepl("mean|std", data_colname)
   
+  # Read X_train and y_train text files to get corresponding training data
   X_trainingdata <- read.table("./UCI HAR Dataset/train/X_train.txt")
   Y_trainingdata <- read.table("./UCI HAR Dataset/train/y_train.txt")
   
+  # Read subject_train text file to get the id of the test subjects 
   trainingsubject <- read.table("./UCI HAR Dataset/train/subject_train.txt")
   
   names(X_trainingdata) = data_colname
@@ -50,11 +52,11 @@ run_analysis <- function()
   
   
   Y_trainingdata[,2] = act_lbls[Y_trainingdata[,1]]
-  names(Y_trainingdata) = c("ACTIVITY_ID", "ACTIVITY_LABEL")
-  names(trainingsubject) = "PARTICIPANT"
+  names(Y_trainingdata) = c("ACTIVITY_ID", "ACTIVITY_LABEL")  ## give meaningful labels
+  names(trainingsubject) = "PARTICIPANT"                      ## give meaningful labels
   
-  
-  trainingdata <- cbind(as.data.table(trainingsubject), Y_trainingdata, X_trainingdata)
+  ## merge the X and Y coordinates of training data
+  trainingdata <- cbind(as.data.table(trainingsubject), Y_trainingdata, X_trainingdata)  
   
   ##------------------------------------------------------------------------------------
   
