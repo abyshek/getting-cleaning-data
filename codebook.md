@@ -33,7 +33,7 @@ Section 3: This section merges the datasets created by section 1 and section 2 a
 
 Section 4: This section creates a second tidy dataset with average values of each activity and each subjects. This section uses the melt and dcast function of "reshape2" package to convert long data format to wide data format.
 
-Section 5: This final section outputs the tidy data created in section 4 to a text file named "tidy_data.txt".
+Section 5: This final section outputs the tidy data created in section 4 to a text file named "tidy_data.txt" and to a csv file named "tidy_data.csv". Additional csv file has been created to present the tidy data in a better format.
 
 # Implementation of the code
 
